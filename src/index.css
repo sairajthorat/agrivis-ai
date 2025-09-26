@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AgriVision AI Dashboard Design System */
+
+@layer base {
+  :root {
+    /* Core Agricultural Dashboard Colors */
+    --dashboard-bg: 222 47% 7%;
+    --dashboard-surface: 222 39% 12%;
+    --dashboard-surface-elevated: 222 35% 16%;
+    --dashboard-border: 222 25% 22%;
+    
+    /* Text Colors */
+    --text-primary: 0 0% 98%;
+    --text-secondary: 220 9% 65%;
+    --text-muted: 220 5% 50%;
+    
+    /* Agricultural Accent Colors */
+    --agri-green: 158 64% 52%;
+    --agri-green-light: 158 64% 65%;
+    --agri-blue: 217 91% 60%;
+    --agri-amber: 45 96% 64%;
+    --agri-red: 0 84% 60%;
+    --agri-purple: 262 83% 58%;
+    
+    /* Gradient Definitions */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--agri-green)), hsl(var(--agri-blue)));
+    --gradient-surface: linear-gradient(145deg, hsl(var(--dashboard-surface)), hsl(var(--dashboard-surface-elevated)));
+    --gradient-glow: radial-gradient(circle at center, hsl(var(--agri-green) / 0.2), transparent 70%);
+    
+    /* Chart Colors */
+    --chart-1: var(--agri-green);
+    --chart-2: var(--agri-blue);
+    --chart-3: var(--agri-amber);
+    --chart-4: var(--agri-red);
+    --chart-5: var(--agri-purple);
+    
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(222 47% 3% / 0.3), 0 2px 4px -1px hsl(222 47% 3% / 0.2);
+    --shadow-elevated: 0 10px 15px -3px hsl(222 47% 3% / 0.4), 0 4px 6px -2px hsl(222 47% 3% / 0.3);
+    --shadow-glow: 0 0 20px hsl(var(--agri-green) / 0.4);
+    
+    /* Standard shadcn variables for compatibility */
+    --background: var(--dashboard-bg);
+    --foreground: var(--text-primary);
+    --card: var(--dashboard-surface);
+    --card-foreground: var(--text-primary);
+    --popover: var(--dashboard-surface-elevated);
+    --popover-foreground: var(--text-primary);
+    --primary: var(--agri-green);
+    --primary-foreground: 222 47% 7%;
+    --secondary: var(--dashboard-surface-elevated);
+    --secondary-foreground: var(--text-primary);
+    --muted: var(--dashboard-surface);
+    --muted-foreground: var(--text-muted);
+    --accent: var(--agri-blue);
+    --accent-foreground: var(--text-primary);
+    --destructive: var(--agri-red);
+    --destructive-foreground: var(--text-primary);
+    --border: var(--dashboard-border);
+    --input: var(--dashboard-surface-elevated);
+    --ring: var(--agri-green);
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground overflow-hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  html, body, #root {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer components {
+  /* Dashboard Grid Layout */
+  .dashboard-grid {
+    @apply grid h-screen;
+    grid-template-rows: 80px 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-main {
+    @apply grid gap-4 p-4;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas:
+      "kpi kpi kpi"
+      "predictions charts satellite"
+      "alerts alerts alerts";
+    height: calc(100vh - 80px);
+    overflow: hidden;
+  }
+
+  /* Card Components */
+  .agri-card {
+    @apply rounded-xl border border-border p-6 transition-all duration-300;
+    background: var(--gradient-surface);
+    box-shadow: var(--shadow-card);
+  }
+
+  .agri-card:hover {
+    @apply transform -translate-y-1;
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .agri-card-glow {
+    @apply agri-card relative overflow-hidden;
+  }
+
+  .agri-card-glow::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: var(--gradient-glow);
+  }
+
+  .agri-card-glow:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Button Variants */
+  .btn-agri-primary {
+    @apply px-6 py-3 rounded-lg font-medium transition-all duration-200;
+    background: var(--gradient-primary);
+    color: hsl(var(--text-primary));
+    border: 1px solid hsl(var(--agri-green) / 0.3);
+  }
+
+  .btn-agri-primary:hover {
+    @apply transform -translate-y-0.5;
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Status Indicators */
+  .status-healthy { @apply text-green-400 bg-green-400/10 border-green-400/20; }
+  .status-warning { @apply text-amber-400 bg-amber-400/10 border-amber-400/20; }
+  .status-danger { @apply text-red-400 bg-red-400/10 border-red-400/20; }
+  .status-info { @apply text-blue-400 bg-blue-400/10 border-blue-400/20; }
+
+  /* Animations */
+  .pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 hsl(var(--agri-green) / 0.7);
+    }
+    50% {
+      opacity: 0.8;
+      box-shadow: 0 0 0 10px hsl(var(--agri-green) / 0);
+    }
+  }
+
+  .chart-animate {
+    animation: chart-enter 0.6s ease-out;
+  }
+
+  @keyframes chart-enter {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}

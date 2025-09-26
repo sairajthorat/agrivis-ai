@@ -1,0 +1,26 @@
+{
+  "name": "AgriVision AI Dashboard",
+  "short_name": "AgriVision",
+  "description": "Advanced Agricultural Management Dashboard with AI Predictions",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#10b981",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["productivity", "agriculture", "business"],
+  "screenshots": [
+    {
+      "src": "/placeholder.svg",
+      "type": "image/svg+xml",
+      "sizes": "1920x1080",
+      "form_factor": "wide"
+    }
+  ]
+}
